@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+
+    <button id="btn-sample">View Sample</button>
+
+    <div id="msgBox"></div>
+
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/jquery-ui.js"></script>
+    <link href="Scripts/jquery-ui.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn-sample").click(function () {
+                messagebox("This is a sample...", "Message Box Title", function () {
+                    alert('custom functions go here');
+                });
+            });
+        });
+
+    function messagebox(msg, title, func)
+    {
+        $("#msgBox").html("<br/>" + msg + "<br/>")
+            .dialog({
+            resizable: false,
+            modal: true,
+            title: title,
+            width: 400,
+            buttons: {
+                "OK": function () {
+                    $(this).dialog('close');
+                }
+            },
+            close: function (event, ui) {
+                $(this).dialog('destroy').remove();
+                if (func) func();
+            }
+        });
+    }
+    </script>
+</body>
+</html>
